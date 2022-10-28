@@ -3,25 +3,49 @@ import 'package:hive/hive.dart';
 
 import '../../models/students.dart';
 
-class HomePageBody extends StatelessWidget {
+class HomePageBody extends StatefulWidget {
   HomePageBody({super.key});
+
+  @override
+  State<HomePageBody> createState() => _HomePageBodyState();
+}
+
+class _HomePageBodyState extends State<HomePageBody> {
   String name = 'baran';
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-            onPressed: customData,
-            child: const Text(
-              'click',
-              style: TextStyle(fontSize: 24, color: Colors.white),
-            ),
-          ),
+          isLoading
+              ? const CircularProgressIndicator()
+              : TextButton(
+                  onPressed: layzBox,
+                  child: const Text(
+                    'click',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                ),
         ],
       ),
     );
+  }
+
+  var isLoading = false;
+
+  layzBox() async {
+    setState(() => isLoading = true);
+    var numbers = Hive.lazyBox<int>('numbers');
+    numbers.clear();
+    for (var i = 0; i < 10000; i++) {
+      await numbers.add(i);
+    }
+    for (var i = 0; i <= 10000; i++) {
+      i == 10000 ? print('done') : null;
+    }
+    setState(() => isLoading = false);
   }
 
   customData() async {
