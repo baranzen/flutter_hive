@@ -14,6 +14,7 @@ class HomePageBody extends StatefulWidget {
 class _HomePageBodyState extends State<HomePageBody> {
   String name = 'baran';
   var isLoading = false;
+  var numbers = Hive.lazyBox<int>('numbers');
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +56,6 @@ class _HomePageBodyState extends State<HomePageBody> {
     );
   }
 
-  var numbers = Hive.lazyBox<int>('numbers');
-
   Future<void> layzBox() async {
     setState(() => isLoading = true);
     numbers.clear();
@@ -67,11 +66,12 @@ class _HomePageBodyState extends State<HomePageBody> {
       print(await numbers.getAt(y)); // debug print kullaninca hata verdi
     }
     setState(() => isLoading = false);
-    print('done');
+    debugPrint('done');
 
     // snackbar
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: const Duration(milliseconds: 500),
         content: const Text('done'),
         backgroundColor: HexColor('#5837D0'),
         shape: RoundedRectangleBorder(
