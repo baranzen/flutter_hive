@@ -39,13 +39,13 @@ class _HomePageBodyState extends State<HomePageBody> {
     setState(() => isLoading = true);
     var numbers = Hive.lazyBox<int>('numbers');
     numbers.clear();
-    for (var i = 0; i < 1000; i++) {
-      await numbers.add(i);
+    for (var i = 0; i < 30000; i++) {
+      await numbers.add(i * 500);
     }
-    for (var i = 0; i < 1000; i++) {
-      debugPrint((await numbers.getAt(i)).toString());
+    for (var i = 0; i < 30000; i++) {
+      print(await numbers.getAt(i)); // debug print kullaninca hata verdi
     }
-    print('done');
+    debugPrint('done');
     setState(() => isLoading = false);
   }
 
