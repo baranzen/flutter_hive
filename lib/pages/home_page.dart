@@ -13,6 +13,13 @@ class HomePage extends StatelessWidget {
           title: const Text('Hive Usage'),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(4.0),
+            child: Container(
+              color: HexColor('#5837D0'),
+              height: 4.0,
+            ),
+          ),
         ),
         body: const HomePageBody(),
       );
