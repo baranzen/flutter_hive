@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
             preferredSize: const Size.fromHeight(4.0),
             child: Container(
               color: HexColor('#5837D0'),
-              height: 4.0,
+              height: 2.0,
             ),
           ),
         ),
