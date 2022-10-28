@@ -60,11 +60,11 @@ class _HomePageBodyState extends State<HomePageBody> {
   Future<void> layzBox() async {
     setState(() => isLoading = true);
     numbers.clear();
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 20000; i++) {
       await numbers.add(i);
     }
-    for (var i = 0; i < 100; i++) {
-      print(await numbers.getAt(i)); // debug print kullaninca hata verdi
+    for (var y = 0; y < 20000; y++) {
+      print(await numbers.getAt(y)); // debug print kullaninca hata verdi
     }
     setState(() => isLoading = false);
     print('done');
