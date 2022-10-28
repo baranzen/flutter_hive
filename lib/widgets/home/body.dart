@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hive/hive.dart';
 
 import '../../models/students.dart';
 
 class HomePageBody extends StatefulWidget {
-  HomePageBody({super.key});
+  const HomePageBody({super.key});
 
   @override
   State<HomePageBody> createState() => _HomePageBodyState();
@@ -12,6 +13,7 @@ class HomePageBody extends StatefulWidget {
 
 class _HomePageBodyState extends State<HomePageBody> {
   String name = 'baran';
+  var isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,32 @@ class _HomePageBodyState extends State<HomePageBody> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           isLoading
-              ? const CircularProgressIndicator()
+              ? CircularProgressIndicator(
+                  color: HexColor('#5837D0'),
+                )
               : TextButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all(HexColor('#5837D0')),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
                   onPressed: layzBox,
                   child: const Text(
                     'click',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
         ],
@@ -33,20 +55,30 @@ class _HomePageBodyState extends State<HomePageBody> {
     );
   }
 
-  var isLoading = false;
+  var numbers = Hive.lazyBox<int>('numbers');
 
-  layzBox() async {
+  Future<void> layzBox() async {
     setState(() => isLoading = true);
-    var numbers = Hive.lazyBox<int>('numbers');
     numbers.clear();
-    for (var i = 0; i < 30000; i++) {
-      await numbers.add(i * 500);
+    for (var i = 0; i < 100; i++) {
+      await numbers.add(i);
     }
-    for (var i = 0; i < 30000; i++) {
+    for (var i = 0; i < 100; i++) {
       print(await numbers.getAt(i)); // debug print kullaninca hata verdi
     }
-    debugPrint('done');
     setState(() => isLoading = false);
+    print('done');
+
+    // snackbar
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('done'),
+        backgroundColor: HexColor('#5837D0'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
   }
 
   customData() async {

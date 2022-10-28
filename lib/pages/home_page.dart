@@ -7,15 +7,13 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: HexColor('#937DC2'),
-      appBar: AppBar(
-        title: const Text('Hive Usage'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: HomePageBody(),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: HexColor('#293462'),
+        appBar: AppBar(
+          title: const Text('Hive Usage'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: const HomePageBody(),
+      );
 }
