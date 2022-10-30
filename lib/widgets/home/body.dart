@@ -65,7 +65,7 @@ class _HomePageBodyState extends State<HomePageBody> {
       await numbers.add(i);
     }
     for (var y = 0; y < 20000; y++) {
-      print(await numbers.getAt(y)); // debug print kullaninca hata verdi
+      print(await numbers.getAt(y)); 
     }
     setState(() => isLoading = false);
     print('done');
