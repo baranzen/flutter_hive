@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hive/hive.dart';
@@ -46,7 +48,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                   child: const Text(
                     'click',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       color: Colors.white,
                     ),
                   ),
@@ -58,7 +60,7 @@ class _HomePageBodyState extends State<HomePageBody> {
 
   Future<void> layzBox() async {
     setState(() => isLoading = true);
-    numbers.clear();
+    await numbers.clear();
     for (var i = 0; i < 20000; i++) {
       await numbers.add(i);
     }
@@ -66,7 +68,7 @@ class _HomePageBodyState extends State<HomePageBody> {
       print(await numbers.getAt(y)); // debug print kullaninca hata verdi
     }
     setState(() => isLoading = false);
-    debugPrint('done');
+    print('done');
 
     // snackbar
     ScaffoldMessenger.of(context).showSnackBar(
