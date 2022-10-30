@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../models/students.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   //! hive init
   await Hive.initFlutter('app');
   // app is the name of the folder //and its should be in top of the main function
